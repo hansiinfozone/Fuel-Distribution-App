@@ -1,6 +1,7 @@
 package com.fueldistribution.order.orderservice;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +35,15 @@ public class OrderController {
 	@PostMapping(path="/create")
 	public String createAndProduceOrder(@RequestBody Order order) {
 		
+		order.setReferenceNumber(UUID.randomUUID().toString());
 		Order orderWithRef = orderDetailsRepository.save(order);
-		System.out.println(orderWithRef);
-		orderProducer.produceOrder(orderWithRef);
+
+		OrderEvent orderEvent = new OrderEvent();
+		orderEvent.setStatus("PENDING");
+		orderEvent.setMessage("order status is in creating state");
+		orderEvent.setOrder(order);
+		orderProducer.sendMessage(orderEvent);
+		
 		return "order placed successfully";
 		
 	}
@@ -48,7 +55,7 @@ public class OrderController {
 		}
 	 
 	 @RequestMapping(value="/order" ,method=RequestMethod.GET)
-		public ResponseEntity<Optional<Order>> fetchStudent(@RequestParam Integer referenceNumber) {
+		public ResponseEntity<Optional<Order>> fetchStudent(@RequestParam String referenceNumber) {
 		
 			Optional<Order> order = orderService.fetchOrdertByReferenceNumber(referenceNumber);
 			

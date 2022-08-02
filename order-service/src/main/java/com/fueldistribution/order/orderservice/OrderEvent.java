@@ -1,12 +1,32 @@
 package com.fueldistribution.order.orderservice;
 
 
+
+
 public class OrderEvent {
 	
-	private String Message;
 	private String orderReferenceNumber;
 	private String status;
+	private String Message;
 	private Order order;
+	
+	
+	
+	public OrderEvent() {}
+	
+	public OrderEvent(String status, String message, Order order) {
+		super();
+		this.status = status;
+		Message = message;
+		this.order = order;
+	}
+
+	public OrderEvent(String orderReferenceNumber, String status, String message, Order order) {
+		this.orderReferenceNumber = orderReferenceNumber;
+		this.status = status;
+		Message = message;
+		this.order = order;
+	}
 	
 	public String getMessage() {
 		return Message;

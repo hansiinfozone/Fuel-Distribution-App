@@ -4,6 +4,6 @@ import java.util.Optional;
 
 public interface OrderService {
 
-	Optional<Order> fetchOrdertByReferenceNumber(Integer refNumber);
+	Optional<Order> fetchOrdertByReferenceNumber(String refNo);
 
 }

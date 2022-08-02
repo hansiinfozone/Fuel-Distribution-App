@@ -12,9 +12,9 @@ public class OrderServiceImpl implements OrderService{
 	OrderDetailsRepository orderDetailsRepository;
 	
 	@Override
-	public Optional<Order> fetchOrdertByReferenceNumber(Integer refNumber) {
+	public Optional<Order> fetchOrdertByReferenceNumber(String refNumber) {
 		// TODO Auto-generated method stub
-		 Optional<Order> order = orderDetailsRepository.findById(refNumber);
+		 Optional<Order> order = orderDetailsRepository.findByReferenceNumber(refNumber);
 		 if(order.isPresent()) {
 			 order.get();
 		 }

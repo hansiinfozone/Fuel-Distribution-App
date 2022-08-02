@@ -10,8 +10,7 @@ import javax.persistence.Table;
 public class Order {
 
 	@Id
-	@GeneratedValue
-	private Integer referenceNumber;
+	private String referenceNumber;
 	private int gasStationId;
 	private String gasStationName;
 	private String typeOfFuel;
@@ -21,7 +20,7 @@ public class Order {
 		
 	}
 	
-	public Order( Integer referenceNumber, int gasStationId, String gasStationName, String typeOfFuel,
+	public Order( String referenceNumber, int gasStationId, String gasStationName, String typeOfFuel,
 			int capacityInLitres) {
 		
 		this.referenceNumber = referenceNumber;
@@ -43,10 +42,10 @@ public class Order {
 
 
 
-	public Integer getReferenceNumber() {
+	public String getReferenceNumber() {
 		return referenceNumber;
 	}
-	public void setReferenceNumber(Integer referenceNumber) {
+	public void setReferenceNumber(String referenceNumber) {
 		this.referenceNumber = referenceNumber;
 	}
 	public int getGasStationId() {
