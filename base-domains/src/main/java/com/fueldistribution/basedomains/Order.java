@@ -1,12 +1,13 @@
-package com.fueldistribution.order.orderservice;
+package com.fueldistribution.basedomains;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 @Entity
-@Table(name="orderDetails")
+@Table(name="order_details")
 public class Order {
 
 	@Id

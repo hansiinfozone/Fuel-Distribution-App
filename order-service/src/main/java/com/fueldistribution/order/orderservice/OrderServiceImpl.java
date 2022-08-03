@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fueldistribution.basedomains.Order;
+
 @Service
 public class OrderServiceImpl implements OrderService{
 

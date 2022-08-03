@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fueldistribution.basedomains.Order;
+import com.fueldistribution.basedomains.OrderEvent;
+
 
 @RestController
 @RequestMapping(path="/orders")

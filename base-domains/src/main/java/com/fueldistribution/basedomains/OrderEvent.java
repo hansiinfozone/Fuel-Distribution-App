@@ -1,9 +1,8 @@
-package com.fueldistribution.order.orderservice;
-
-
+package com.fueldistribution.basedomains;
 
 
 public class OrderEvent {
+	
 	
 	private String orderReferenceNumber;
 	private String status;
