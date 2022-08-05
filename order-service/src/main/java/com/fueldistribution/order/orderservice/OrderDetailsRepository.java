@@ -11,6 +11,10 @@ public interface OrderDetailsRepository extends JpaRepository<Order, Integer>{
 
 	Optional<Order> findByReferenceNumber(String refNumber);
 
+	Order findStatusByReferenceNumber(String referenceNumber);
+
+	Order getByReferenceNumber(String refNo);
+
 	
 
 	

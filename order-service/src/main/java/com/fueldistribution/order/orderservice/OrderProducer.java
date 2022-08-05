@@ -9,7 +9,7 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
-import com.fueldistribution.basedomains.OrderEvent;
+import com.fueldistribution.basedomains.Order;
 
 
 
@@ -19,19 +19,19 @@ public class OrderProducer {
 	private NewTopic topic;
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrderProducer.class);
 
-	private KafkaTemplate<String, OrderEvent> kafkaTemplate;
+	private KafkaTemplate<String, Order> kafkaTemplate;
 	
 	
-	public OrderProducer(NewTopic topic, KafkaTemplate<String, OrderEvent> kafkaTemplate) {
+	public OrderProducer(NewTopic topic, KafkaTemplate<String, Order> kafkaTemplate) {
 		super();
 		this.topic = topic;
 		this.kafkaTemplate = kafkaTemplate;
 	}
 
-	public void sendMessage(OrderEvent event) {
-		LOGGER.info(String.format("Order Event => %s", event.toString()));
+	public void sendMessage(Order orderevent) {
+		LOGGER.info(String.format("Order Event => %s", orderevent.toString()));
 	
-		Message<OrderEvent> message = MessageBuilder.withPayload(event).
+		Message<Order> message = MessageBuilder.withPayload(orderevent).
 				setHeader(KafkaHeaders.TOPIC, topic.name()).build();
 		
 		kafkaTemplate.send(message);
@@ -52,5 +52,4 @@ public class OrderProducer {
 //    }
 	
 
-	
 }

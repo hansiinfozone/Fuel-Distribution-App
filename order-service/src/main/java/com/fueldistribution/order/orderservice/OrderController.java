@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.fueldistribution.basedomains.Order;
-import com.fueldistribution.basedomains.OrderEvent;
 
 
 @RestController
@@ -39,14 +37,10 @@ public class OrderController {
 	public String createAndProduceOrder(@RequestBody Order order) {
 		
 		order.setReferenceNumber(UUID.randomUUID().toString());
-		Order orderWithRef = orderDetailsRepository.save(order);
-
-		OrderEvent orderEvent = new OrderEvent();
-		orderEvent.setStatus("PENDING");
-		orderEvent.setMessage("order status is in creating state");
-		orderEvent.setOrder(order);
-		orderProducer.sendMessage(orderEvent);
-		
+		order.setStatus("PENDING");
+		order.setMessage("order created successfully");
+		orderProducer.sendMessage(order);
+		order = orderDetailsRepository.save(order);
 		return "order placed successfully";
 		
 	}
@@ -58,7 +52,7 @@ public class OrderController {
 		}
 	 
 	 @RequestMapping(value="/order" ,method=RequestMethod.GET)
-		public ResponseEntity<Optional<Order>> fetchStudent(@RequestParam String referenceNumber) {
+		public ResponseEntity<Optional<Order>> getOrderDetails(@RequestParam String referenceNumber) {
 		
 			Optional<Order> order = orderService.fetchOrdertByReferenceNumber(referenceNumber);
 			
@@ -68,6 +62,16 @@ public class OrderController {
 				return ResponseEntity.ok().body(order);
 			}
 		}
+	 
+	 @RequestMapping(value="/status" ,method=RequestMethod.GET)
+		public @ResponseBody String getOrderStatus(@RequestParam String referenceNumber) {
+		
+			String orderStatus = orderService.fetchOrderStatustByReferenceNumber(referenceNumber);
+			return orderStatus;
+			
+			
+		}
+	
 	
 	
 }

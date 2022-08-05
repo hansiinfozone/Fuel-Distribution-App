@@ -24,4 +24,11 @@ public class OrderServiceImpl implements OrderService{
 		 return  order;
 	}
 
+	@Override
+	public String fetchOrderStatustByReferenceNumber(String referenceNumber) {
+		// TODO Auto-generated method stub
+		Order order = orderDetailsRepository.findStatusByReferenceNumber(referenceNumber);
+		return order.getStatus();
+	}
+
 }

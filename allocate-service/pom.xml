@@ -8,11 +8,11 @@
 		<version>2.7.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.fueldistribution.schedule</groupId>
-	<artifactId>schedule-service</artifactId>
+	<groupId>com.fueldistribution.allocate</groupId>
+	<artifactId>allocate-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>schedule-service</name>
-	<description>Demo project for Spring Boot</description>
+	<name>allocate-service</name>
+	<description>Demo project for allocate service</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -26,19 +26,22 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.fueldistribution.basedomains</groupId>
-			<artifactId>base-domains</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
-
+		<dependency>
+		    <groupId>javax.persistence</groupId>
+		    <artifactId>javax.persistence-api</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fueldistribution.basedomains</groupId>
+			<artifactId>base-domains</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

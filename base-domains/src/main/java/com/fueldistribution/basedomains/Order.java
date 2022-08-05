@@ -16,6 +16,8 @@ public class Order {
 	private String gasStationName;
 	private String typeOfFuel;
 	private int capacityInLitres;
+	private String status;
+	private String Message;
 	
 	public Order() {
 		
@@ -74,6 +76,20 @@ public class Order {
 		this.capacityInLitres = capacityInLitres;
 	}
 	
-	
-	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getMessage() {
+		return Message;
+	}
+
+	public void setMessage(String message) {
+		Message = message;
+	}
+
 }

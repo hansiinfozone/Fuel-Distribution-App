@@ -8,4 +8,6 @@ public interface OrderService {
 
 	Optional<Order> fetchOrdertByReferenceNumber(String refNo);
 
+	String fetchOrderStatustByReferenceNumber(String referenceNumber);
+
 }
