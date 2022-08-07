@@ -18,6 +18,7 @@ public class DispatchSceduledDetails {
 	int vehicleNo;
 	Date scheduledDate;
 	String driverName;
+	
 	public int getId() {
 		return id;
 	}

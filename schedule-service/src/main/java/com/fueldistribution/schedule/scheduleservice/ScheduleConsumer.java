@@ -31,10 +31,15 @@ public class ScheduleConsumer {
 		LOGGER.info(String.format("Scheduled details received in dispatch service => %s", allocationDetails.toString()));
 		
 		String refNo= allocationDetails.getRefNo();
-	  
-	    
-	    scheduleController.scheduleDispatch(refNo);
-//		
+		int allocatedAmount = allocationDetails.getAllocatedAmount();
+		String allocate = "ALLOCATED";
+		
+		if(allocationDetails.getAllocatedStatus().equals(allocate)) {	
+			scheduleController.scheduleDispatch(refNo,allocatedAmount);
+}else {
+	LOGGER.info(String.format("Scheduled can not be processed: ", refNo));
+
+	}
 	}
 
 }

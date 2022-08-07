@@ -27,11 +27,7 @@ public class ScheduleController {
 		this.scheduleDispatchRepository = scheduleDispatchRepository;
 	}
 
-	
-
-
-
-	public void scheduleDispatch(String refNo) {
+public void scheduleDispatch(String refNo, int allocatedAmount) {
 		//check allocated details
 		//check vehcle details
 		//schedule dispatch
@@ -42,7 +38,6 @@ public class ScheduleController {
 		dispSceduledDetails.setVehicleNo(678516);
 		dispSceduledDetails.setDriverName("abh");
 		dispSceduledDetails.setStatus("DISPATCH SCHEDULED");
-		dispSceduledDetails.setId(12);
 		scheduleDispatchRepository.save(dispSceduledDetails);
 		dispatchScheduleProducer.sendMessage(dispSceduledDetails);
 	}

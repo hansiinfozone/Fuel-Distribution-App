@@ -9,5 +9,7 @@ public interface AllocationRepository extends JpaRepository<FuelDetails, Integer
 
 	AllocationDetails save(AllocationDetails allocationDetails);
 
+	FuelDetails getExistingAmountByFuelName(String fuelType);
+
 
 }

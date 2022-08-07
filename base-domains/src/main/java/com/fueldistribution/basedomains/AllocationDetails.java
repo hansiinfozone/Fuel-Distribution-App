@@ -14,24 +14,28 @@ public class AllocationDetails {
 	String fuelName;
 	int allocatedAmount;
 	String allocatedStatus;
+	String allocatedMessage;
 	
 	public AllocationDetails() {
 		
 	}
 
-	public AllocationDetails(String refNo, String fuelName, int allocatedAmount, String allocatedStatus) {
+	public AllocationDetails(String refNo, String fuelName, int allocatedAmount, String allocatedStatus,String allocatedMessage) {
 		super();
 		this.refNo = refNo;
 		this.fuelName = fuelName;
 		this.allocatedAmount = allocatedAmount;
 		this.allocatedStatus = allocatedStatus;
+		this.allocatedMessage =  allocatedMessage;
 	}
 
-	public AllocationDetails(String fuelName, int allocatedAmount, String allocatedStatus) {
+	public AllocationDetails(String fuelName, int allocatedAmount, String allocatedStatus,String allocatedMessage) {
 		super();
 		this.fuelName = fuelName;
 		this.allocatedAmount = allocatedAmount;
 		this.allocatedStatus = allocatedStatus;
+		this.allocatedMessage =  allocatedMessage;
+
 	}
 
 	
@@ -73,6 +77,14 @@ public class AllocationDetails {
 
 	public void setAllocatedStatus(String allocatedStatus) {
 		this.allocatedStatus = allocatedStatus;
+	}
+
+	public String getAllocatedMessage() {
+		return allocatedMessage;
+	}
+
+	public void setAllocatedMessage(String allocatedMessage) {
+		this.allocatedMessage = allocatedMessage;
 	}
 	
 	
