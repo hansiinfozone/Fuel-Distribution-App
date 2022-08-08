@@ -85,7 +85,7 @@ public class OrderController {
 			
 		}
 
-
+	
 	public void updateStatus(String refNo, String status) {
 		
 		Order order = orderDetailsRepository.getByReferenceNumber(refNo);
@@ -95,6 +95,26 @@ public class OrderController {
 		
 		
 	}
+public void updateStatusAllocate(String refNo, String status) {
+		
+		Order order = orderDetailsRepository.getByReferenceNumber(refNo);
+		order.setStatus("ALLOCATED");
+		order = orderDetailsRepository.save(order);
+		
+		
+		
+	}
+
+public void updateStatusScheduled(String refNo, String status) {
+	
+	Order order = orderDetailsRepository.getByReferenceNumber(refNo);
+	order.setStatus("DISPATCH SCHEDULED");
+	order = orderDetailsRepository.save(order);
+	
+	
+	
+}
+
 
 
 	

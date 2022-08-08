@@ -12,41 +12,41 @@ import com.fueldistribution.basedomains.DispatchSceduledDetails;
 import com.fueldistribution.basedomains.OrderDispatchDetails;
 
 @Component
-public class OrderConsumer {
+public class OrderConsumerAllocation {
 
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(OrderConsumer.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(OrderConsumerAllocation.class);
 	
 	@Autowired
 	private OrderController orderController;
 	
 	
-	public OrderConsumer() {
+	public OrderConsumerAllocation() {
 		
 	}
 
 
-	public OrderConsumer(OrderController orderController) {
+	public OrderConsumerAllocation(OrderController orderController) {
 		super();
 		this.orderController = orderController;
 	}
 
 
 	@KafkaListener(
-			topics= "dispatch-topic",
+			topics= "allocation-topic",
 			groupId = "${spring.kafka.consumer.group-id}"
 			)
 	
-	public void consume(OrderDispatchDetails[] dispatchDetails) {
+	public void consume(AllocationDetails[] allocationDetails) {
 		
 		
-		LOGGER.info(String.format("dispatch details received in dispatch service "));
+		LOGGER.info(String.format("allocationDetails received in dispatch service "));
 		
-		for(OrderDispatchDetails dispatch : dispatchDetails) {
-			String refNo= dispatch.getRefrenceNo();
-			String status = dispatch.getStatus();
-			if(status.equalsIgnoreCase("COMPLETED")){
-				orderController.updateStatus(refNo,status);
+		for(AllocationDetails allocate : allocationDetails) {
+			String refNo= allocate.getRefNo();
+			String status = allocate.getAllocatedStatus();
+			if(status.equalsIgnoreCase("ALLOCATED")){
+				orderController.updateStatusAllocate(refNo,status);
 		}
 
 		

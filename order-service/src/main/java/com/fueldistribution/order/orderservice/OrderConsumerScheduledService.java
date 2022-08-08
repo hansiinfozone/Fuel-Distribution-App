@@ -12,41 +12,41 @@ import com.fueldistribution.basedomains.DispatchSceduledDetails;
 import com.fueldistribution.basedomains.OrderDispatchDetails;
 
 @Component
-public class OrderConsumer {
+public class OrderConsumerScheduledService {
 
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(OrderConsumer.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(OrderConsumerScheduledService.class);
 	
 	@Autowired
 	private OrderController orderController;
 	
 	
-	public OrderConsumer() {
+	public OrderConsumerScheduledService() {
 		
 	}
 
 
-	public OrderConsumer(OrderController orderController) {
+	public OrderConsumerScheduledService(OrderController orderController) {
 		super();
 		this.orderController = orderController;
 	}
 
 
 	@KafkaListener(
-			topics= "dispatch-topic",
+			topics= "schedule-topic",
 			groupId = "${spring.kafka.consumer.group-id}"
 			)
 	
-	public void consume(OrderDispatchDetails[] dispatchDetails) {
+	public void consume(DispatchSceduledDetails[] dispatchSceduledDetails) {
 		
 		
-		LOGGER.info(String.format("dispatch details received in dispatch service "));
+		LOGGER.info(String.format("schedule details received in dispatch service "));
 		
-		for(OrderDispatchDetails dispatch : dispatchDetails) {
-			String refNo= dispatch.getRefrenceNo();
+		for(DispatchSceduledDetails dispatch : dispatchSceduledDetails) {
+			String refNo= dispatch.getReferenceNo();
 			String status = dispatch.getStatus();
-			if(status.equalsIgnoreCase("COMPLETED")){
-				orderController.updateStatus(refNo,status);
+			if(status.equalsIgnoreCase("DISPATCH SCHEDULED")){
+				orderController.updateStatusScheduled(refNo,status);
 		}
 
 		

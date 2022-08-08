@@ -15,7 +15,7 @@ import com.fueldistribution.basedomains.DispatchSceduledDetails;
 import com.fueldistribution.basedomains.OrderDispatchDetails;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://127.0.0.1:8087/*")
 @RequestMapping(path="/dispatch")
 public class DispatchController {
 	
@@ -34,32 +34,37 @@ public class DispatchController {
 		this.dispatchRepository  = dispatchRepository;
 	}
 			
-//
-//public void dispatchOrder(String refNo, String status, int vehicleNo) {
-//		
-//		
-//		OrderDispatchDetails dispachDetails = new  OrderDispatchDetails();
-//		dispachDetails.setRefrenceNo(refNo);
-//		dispachDetails.setVehicleNo(678516);
-//		dispachDetails.setStatus("DISPATCH COMPLETED");
-//		dispatchRepository.save(dispachDetails);
-//		dispatchProducer.sendMessage(dispachDetails);
-//	}
 
-//@PutMapping(path="/update/{referenceNumber}")
-//public ResponseEntity<OrderDispatchDetails> updateOrder(@PathVariable(value = "referenceNumber") String referenceNumber,
-//@Validated @RequestBody OrderDispatchDetails dispatch)
-//{
-//	
-//	OrderDispatchDetails dispachDetails = dispatchRepository.getOrderDispatchDetailsByRefrenceNo(referenceNumber);
-//	
-//	dispachDetails.setStatus("DISPATCH COMPLETED");
-//	final OrderDispatchDetails dispachDetail = dispatchRepository.save(dispachDetails);
-//	dispatchProducer.sendMessage(dispachDetails);
-//	
-//	return ResponseEntity.ok(dispachDetail);
-//
-//}
+public void dispatchOrder(String refNo, String status, int vehicleNo) {
+//				
+		OrderDispatchDetails dispachDetails = new  OrderDispatchDetails();
+		dispachDetails.setRefrenceNo(refNo);
+		dispachDetails.setVehicleNo(678516);
+		dispachDetails.setStatus("COMPLETED");
+		dispatchRepository.save(dispachDetails);
+		dispatchProducer.sendMessage(dispachDetails);
+	}
+
+@PutMapping(path="/update")
+public OrderDispatchDetails updateOrder(String referenceNumber)
+{
+	
+	OrderDispatchDetails dispachDetails = getOrderDispatchDetailsByRefrenceNo(referenceNumber);
+	
+	dispachDetails.setStatus("COMPLETED");
+	dispachDetails = dispatchRepository.save(dispachDetails);
+	dispatchProducer.sendMessage(dispachDetails);
+	
+	return  dispachDetails;
+
+}
+
+
+private OrderDispatchDetails getOrderDispatchDetailsByRefrenceNo(String referenceNumber) {
+	 
+	OrderDispatchDetails dispachDetails = dispatchRepository.getByRefrenceNo(referenceNumber);
+	return dispachDetails;
+}
 
 
 }
