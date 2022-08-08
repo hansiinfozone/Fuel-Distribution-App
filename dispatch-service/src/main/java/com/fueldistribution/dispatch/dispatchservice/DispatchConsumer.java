@@ -33,7 +33,7 @@ public class DispatchConsumer {
 		Integer vehicleNo = dispatchDetails.getVehicleNo();
 		
 		
-		dispatchController.dispatchOrder(refNo,status,vehicleNo);
+		//dispatchController.dispatchOrder(refNo,status,vehicleNo);
 	}
 	}
 

@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,18 +37,28 @@ public class OrderController {
 	private OrderDetailsRepository orderDetailsRepository;
 	
 	@PostMapping(path="/create")
-	public String createAndProduceOrder(@RequestBody Order order) {
+	public Order createAndProduceOrder(@RequestBody Order order) {
 		
 		order.setReferenceNumber(UUID.randomUUID().toString());
-		order.setStatus("PENDING");
+		order.setStatus("ORDER CREATED");
 		order.setMessage("order created successfully");
 		orderProducer.sendMessage(order);
 		order = orderDetailsRepository.save(order);
-		return "order placed successfully";
+		
+		sendReferenceNumber(order.getReferenceNumber());
+		return order;
 		
 	}
 	
-	 @GetMapping(path="/all")  
+	
+	@GetMapping(path="/ref" , produces = MediaType.APPLICATION_JSON_VALUE)
+	 private String sendReferenceNumber(@RequestParam String  referenceNumber) {
+	    
+		return referenceNumber;
+		
+	}
+
+	@GetMapping(path="/all")  
 	 public @ResponseBody Iterable<Order> getAllOrders() {
 			
 			 return orderDetailsRepository.findAll();
@@ -73,6 +84,17 @@ public class OrderController {
 			
 			
 		}
+
+
+	public void updateStatus(String refNo, String status) {
+		
+		Order order = orderDetailsRepository.getByReferenceNumber(refNo);
+		order.setStatus("COMPLETED");
+		order = orderDetailsRepository.save(order);
+		
+		
+		
+	}
 
 
 	

@@ -1,5 +1,6 @@
 package com.fueldistribution.basedomains;
 
+import java.time.Instant;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -74,8 +75,8 @@ public class DispatchSceduledDetails {
 		return scheduledDate;
 	}
 
-	public void setScheduledDate(Date scheduledDate) {
-		this.scheduledDate = scheduledDate;
+	public void setScheduledDate(Date date) {
+		this.scheduledDate = date;
 	}
 
 	public String getDriverName() {

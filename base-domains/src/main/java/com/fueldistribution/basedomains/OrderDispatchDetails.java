@@ -7,8 +7,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="OrdeDispatchDetails")
-public class OrderDispatchDetails {
+public class OrderDispatchDetails{
 
+	/**
+	 * 
+	 */
+	
 	@Id
 	@GeneratedValue
 	int id;

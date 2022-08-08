@@ -6,5 +6,7 @@ import com.fueldistribution.basedomains.OrderDispatchDetails;
 
 public interface  DispatchRepository extends JpaRepository<OrderDispatchDetails, Integer>{
 
+	OrderDispatchDetails getOrderDispatchDetailsByRefrenceNo(String referenceNumber);
+
 
 }
