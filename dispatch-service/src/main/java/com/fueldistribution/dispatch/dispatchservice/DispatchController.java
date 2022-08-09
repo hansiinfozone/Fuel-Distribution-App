@@ -15,7 +15,7 @@ import com.fueldistribution.basedomains.DispatchSceduledDetails;
 import com.fueldistribution.basedomains.OrderDispatchDetails;
 
 @RestController
-@CrossOrigin(origins = "http://127.0.0.1:8087/*")
+@CrossOrigin
 @RequestMapping(path="/dispatch")
 public class DispatchController {
 	
@@ -46,11 +46,11 @@ public void dispatchOrder(String refNo, String status, int vehicleNo) {
 	}
 
 @PutMapping(path="/update")
-public OrderDispatchDetails updateOrder(String referenceNumber)
+public OrderDispatchDetails updateOrder( String referenceNumber)
 {
 	
-	OrderDispatchDetails dispachDetails = getOrderDispatchDetailsByRefrenceNo(referenceNumber);
-	
+	OrderDispatchDetails dispachDetails =new OrderDispatchDetails();
+	dispachDetails.setRefrenceNo(referenceNumber);
 	dispachDetails.setStatus("COMPLETED");
 	dispachDetails = dispatchRepository.save(dispachDetails);
 	dispatchProducer.sendMessage(dispachDetails);
@@ -62,7 +62,7 @@ public OrderDispatchDetails updateOrder(String referenceNumber)
 
 private OrderDispatchDetails getOrderDispatchDetailsByRefrenceNo(String referenceNumber) {
 	 
-	OrderDispatchDetails dispachDetails = dispatchRepository.getByRefrenceNo(referenceNumber);
+	OrderDispatchDetails dispachDetails = dispatchRepository.getOrderDispatchDetailsByRefrenceNo(referenceNumber);
 	return dispachDetails;
 }
 

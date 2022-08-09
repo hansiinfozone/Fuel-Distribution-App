@@ -34,7 +34,7 @@ public class ScheduleConsumer {
 		int allocatedAmount = allocationDetails.getAllocatedAmount();
 		String allocate = "ALLOCATED";
 		
-		if(allocationDetails.getAllocatedStatus().equals(allocate)) {	
+		if(allocationDetails.getAllocatedStatus().equalsIgnoreCase(allocate)) {	
 			scheduleController.scheduleDispatch(refNo,allocatedAmount);
 }else {
 	LOGGER.info(String.format("Scheduled can not be processed: ", refNo));

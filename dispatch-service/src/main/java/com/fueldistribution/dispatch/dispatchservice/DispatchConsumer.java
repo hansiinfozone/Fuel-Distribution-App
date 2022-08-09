@@ -18,6 +18,7 @@ public class DispatchConsumer {
 	@Autowired
 	private DispatchController dispatchController;
 
+
 	@KafkaListener(
 			topics= "schedule-topic",
 			groupId = "${spring.kafka.consumer.group-id}"
@@ -26,15 +27,20 @@ public class DispatchConsumer {
 	public void consume(DispatchSceduledDetails dispatchDetails) {
 		
 		
-		LOGGER.info(String.format("Scheduled details received in dispatch service => %s", dispatchDetails.toString()));
+		LOGGER.info(String.format("Scheduled details received in dispatch service"));
 		
 		String refNo= dispatchDetails.getReferenceNo();
 		String status = dispatchDetails.getStatus();
 		Integer vehicleNo = dispatchDetails.getVehicleNo();
 		
+		if(status.equalsIgnoreCase("DISPATCH SCEDULED")){
+			dispatchController.dispatchOrder(refNo,status,vehicleNo);
+
+		}
 		
-		dispatchController.dispatchOrder(refNo,status,vehicleNo);
-	}
+		}
+		
+	
 	}
 
 
