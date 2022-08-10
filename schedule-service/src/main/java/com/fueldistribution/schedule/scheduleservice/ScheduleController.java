@@ -1,13 +1,11 @@
 package com.fueldistribution.schedule.scheduleservice;
 
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,19 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fueldistribution.basedomains.DispatchSceduledDetails;
 
 @RestController
-@RequestMapping(path="/schedule")
+@RequestMapping(path = "/schedule")
 public class ScheduleController {
-	
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ScheduleController.class);
+
 	@Autowired
 	private DispatchScheduleProducer dispatchScheduleProducer;
 	@Autowired
 	ScheduleDispatchRepository scheduleDispatchRepository;
-	
-	public ScheduleController()
-	{}  
-	
 
-	
+	public ScheduleController() {
+	}
+
 	public ScheduleController(DispatchScheduleProducer dispatchScheduleProducer,
 			ScheduleDispatchRepository scheduleDispatchRepository) {
 		super();
@@ -35,16 +33,17 @@ public class ScheduleController {
 		this.scheduleDispatchRepository = scheduleDispatchRepository;
 	}
 
-public void scheduleDispatch(String refNo, int allocatedAmount) {
-	
+	public void scheduleDispatch(String refNo, int allocatedAmount) {
+
 		checkVehicleDetails();
-		//schedule dispatch
-	//date 
-		LocalDateTime today = LocalDateTime.now();   
+		// schedule dispatch
+
+		LOGGER.info("Inside scheduleDispatch method");
+		LocalDateTime today = LocalDateTime.now();
 		LocalDateTime tomorrow = today.plusDays(1);
-		Date date =Date.from(tomorrow.atZone(ZoneId.systemDefault()).toInstant()); 
-						
-		DispatchSceduledDetails dispSceduledDetails = new  DispatchSceduledDetails();
+		Date date = Date.from(tomorrow.atZone(ZoneId.systemDefault()).toInstant());
+
+		DispatchSceduledDetails dispSceduledDetails = new DispatchSceduledDetails();
 		dispSceduledDetails.setReferenceNo(refNo);
 		dispSceduledDetails.setVehicleNo(678516);
 		dispSceduledDetails.setDriverName("abh");
@@ -54,17 +53,14 @@ public void scheduleDispatch(String refNo, int allocatedAmount) {
 		dispatchScheduleProducer.sendMessage(dispSceduledDetails);
 	}
 
+	private void checkVehicleDetails() {
+		// TODO Auto-generated method stub
 
-private void checkVehicleDetails() {
-	// TODO Auto-generated method stub
-	
-}
+	}
 
+	public ScheduleController(DispatchScheduleProducer dispatchScheduleProducer) {
 
-
-public ScheduleController(DispatchScheduleProducer dispatchScheduleProducer) {
-
-	this.dispatchScheduleProducer = dispatchScheduleProducer;
-}
+		this.dispatchScheduleProducer = dispatchScheduleProducer;
+	}
 
 }

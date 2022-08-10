@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="allocationDetails")
+@Table(name = "allocationDetails")
 public class AllocationDetails {
 
 	@Id
@@ -15,30 +15,30 @@ public class AllocationDetails {
 	int allocatedAmount;
 	String allocatedStatus;
 	String allocatedMessage;
-	
+
 	public AllocationDetails() {
-		
+
 	}
 
-	public AllocationDetails(String refNo, String fuelName, int allocatedAmount, String allocatedStatus,String allocatedMessage) {
+	public AllocationDetails(String refNo, String fuelName, int allocatedAmount, String allocatedStatus,
+			String allocatedMessage) {
 		super();
 		this.refNo = refNo;
 		this.fuelName = fuelName;
 		this.allocatedAmount = allocatedAmount;
 		this.allocatedStatus = allocatedStatus;
-		this.allocatedMessage =  allocatedMessage;
+		this.allocatedMessage = allocatedMessage;
 	}
 
-	public AllocationDetails(String fuelName, int allocatedAmount, String allocatedStatus,String allocatedMessage) {
+	public AllocationDetails(String fuelName, int allocatedAmount, String allocatedStatus, String allocatedMessage) {
 		super();
 		this.fuelName = fuelName;
 		this.allocatedAmount = allocatedAmount;
 		this.allocatedStatus = allocatedStatus;
-		this.allocatedMessage =  allocatedMessage;
+		this.allocatedMessage = allocatedMessage;
 
 	}
 
-	
 	public int getFuelId() {
 		return fuelId;
 	}
@@ -86,9 +86,5 @@ public class AllocationDetails {
 	public void setAllocatedMessage(String allocatedMessage) {
 		this.allocatedMessage = allocatedMessage;
 	}
-	
-	
-	
-	
-	
+
 }

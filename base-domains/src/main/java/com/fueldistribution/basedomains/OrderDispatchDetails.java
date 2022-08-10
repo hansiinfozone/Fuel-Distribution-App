@@ -6,22 +6,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="OrdeDispatchDetails")
-public class OrderDispatchDetails{
+@Table(name = "OrdeDispatchDetails")
+public class OrderDispatchDetails {
 
-	/**
-	 * 
-	 */
-	
 	@Id
 	@GeneratedValue
 	int id;
 	String refrenceNo;
 	String status;
 	int vehicleNo;
-	
-	public OrderDispatchDetails() {}
-	
+
+	public OrderDispatchDetails() {
+	}
+
 	public OrderDispatchDetails(int id, String refrenceNo, String status, int vehicleNo) {
 		super();
 		this.id = id;
@@ -68,9 +65,5 @@ public class OrderDispatchDetails{
 	public void setVehicleNo(int vehicleNo) {
 		this.vehicleNo = vehicleNo;
 	}
-	
-	
-	
-	
-}
 
+}

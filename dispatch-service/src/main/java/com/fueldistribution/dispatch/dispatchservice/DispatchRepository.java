@@ -8,5 +8,4 @@ public interface  DispatchRepository extends JpaRepository<OrderDispatchDetails,
 
 	OrderDispatchDetails getOrderDispatchDetailsByRefrenceNo(String referenceNumber);
 
-
 }

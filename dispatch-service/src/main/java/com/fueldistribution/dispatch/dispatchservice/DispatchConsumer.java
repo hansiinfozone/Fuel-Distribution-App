@@ -7,40 +7,30 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import com.fueldistribution.basedomains.DispatchSceduledDetails;
 
-
 @Service
 public class DispatchConsumer {
-	
-	
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DispatchConsumer.class);
-	
+
 	@Autowired
 	private DispatchController dispatchController;
 
+	@KafkaListener(topics = "schedule-topic", groupId = "${spring.kafka.consumer.group-id}")
 
-	@KafkaListener(
-			topics= "schedule-topic",
-			groupId = "${spring.kafka.consumer.group-id}"
-			)
-	
 	public void consume(DispatchSceduledDetails dispatchDetails) {
-		
-		
-		LOGGER.info(String.format("Scheduled details received in dispatch service"));
-		
-		String refNo= dispatchDetails.getReferenceNo();
-		String status = dispatchDetails.getStatus();
-		Integer vehicleNo = dispatchDetails.getVehicleNo();
-		
-		if(status.equalsIgnoreCase("DISPATCH SCEDULED")){
-			dispatchController.dispatchOrder(refNo,status,vehicleNo);
 
+		if (dispatchDetails != null) {
+			LOGGER.info("Scheduled details received in dispatch service");
+
+			String refNo = dispatchDetails.getReferenceNo();
+			String status = dispatchDetails.getStatus();
+			Integer vehicleNo = dispatchDetails.getVehicleNo();
+
+			if (status.equalsIgnoreCase("DISPATCH SCEDULED")) {
+				dispatchController.dispatchOrder(refNo, status, vehicleNo);
+
+			}
 		}
-		
-		}
-		
-	
 	}
 
-
+}

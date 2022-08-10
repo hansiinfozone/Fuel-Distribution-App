@@ -1,15 +1,13 @@
 package com.fueldistribution.basedomains;
 
-import java.time.Instant;
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="DispatchScheduleDetails")
+@Table(name = "DispatchScheduleDetails")
 public class DispatchSceduledDetails {
 
 	@Id
@@ -19,7 +17,7 @@ public class DispatchSceduledDetails {
 	int vehicleNo;
 	Date scheduledDate;
 	String driverName;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -37,9 +35,10 @@ public class DispatchSceduledDetails {
 	}
 
 	String status;
-	
-	public DispatchSceduledDetails() {}
-	
+
+	public DispatchSceduledDetails() {
+	}
+
 	public DispatchSceduledDetails(String referenceNo, int vehicleNo, Date scheduledDate, String driverName) {
 		super();
 		this.referenceNo = referenceNo;
@@ -86,7 +85,5 @@ public class DispatchSceduledDetails {
 	public void setDriverName(String driverName) {
 		this.driverName = driverName;
 	}
-	
-	
-	
+
 }
